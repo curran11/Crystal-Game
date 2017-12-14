@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cookie Game</title>
+
+	<style type = "text/css">
+
+		.cookie-image{
+			width: 325px;
+			height: 225px;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Number to Guess: <span id = "numberToGuess"></span></h1>
+
+	<div id = "cookie">
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			var targetNumber = 53;
+
+			$("#numberToGuess").text(targetNumber);	
+		
+			var counter = 0;
+
+			numberOptions = [10,5,3,7];
+
+			targetNumberList = [24,67,35,15];
+
+			function randomGen() {
+				targetNumber = targetNumberList[Math.floor(Math.random() * targetNumberList.length)];
+			};
+
+
+
+			for (var i = 0; i < numberOptions.length; i++){
+
+				var imageCookie = $("<img>")
+
+				imageCookie.addClass("cookie-image")
+
+				imageCookie.attr("src","http://d111vui60acwyt.cloudfront.net/product_photos/33961854/smart_20cookie_20pic_20copy_original.jpg")
+
+				imageCookie.attr("data-cookievalue",numberOptions[i])
+
+				$("#cookie").append(imageCookie)
+			};
+
+
+			$(".cookie-image").on("click",function() {
+
+				var cookieValue = ($(this).attr("data-cookievalue"));
+				cookieValue = parseInt(cookieValue);
+
+				counter += cookieValue;
+
+				alert("New Score: " + counter);
+
+				if (counter === targetNumber) {
+					alert("You Win!!");
+					counter == 0;
+					randomGen();
+				}
+				else if (counter > targetNumber) {
+					alert("You Lose!!");
+					counter = 0;
+					randomGen();
+				}
+
+
+
+
+
+
+			});
+
+		});
+
+
+	
+
+
+
+
+	</script>
+</body>
+</html>
